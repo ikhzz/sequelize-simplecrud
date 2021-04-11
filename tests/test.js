@@ -66,7 +66,7 @@ describe("Transaksi Test", ()=> {
 // check barang
 describe("barang Test", ()=> {
   describe("/barang GET", ()=> {
-    it("it should success get the transaksi data", async ()=> {
+    it("it should success get the barang data", async ()=> {
       const cred = await getCredential()    
       const res = await request(app)
         .get('/barang')
@@ -78,7 +78,7 @@ describe("barang Test", ()=> {
       expect(res.body.message).toEqual("Success")
       expect(res.body).toHaveProperty("data")
     })
-    it("it should not success get the transaksi data", async ()=> {
+    it("it should not success get the barang data", async ()=> {
       const cred = await getCredential()    
       const res = await request(app)
         .get('/barang/1')
@@ -95,7 +95,7 @@ describe("barang Test", ()=> {
 // check pemasok
 describe("pemasok Test", ()=> {
   describe("/pemasok GET", ()=> {
-    it("it should success get the transaksi data", async ()=> {
+    it("it should success get the pemasok data", async ()=> {
       const cred = await getCredential()    
       const res = await request(app)
         .get('/pemasok')
@@ -107,7 +107,7 @@ describe("pemasok Test", ()=> {
       expect(res.body.message).toEqual("Success")
       expect(res.body).toHaveProperty("data")
     })
-    it("it should not success get the transaksi data", async ()=> {
+    it("it should not success get the pemasok data", async ()=> {
       const cred = await getCredential()    
       const res = await request(app)
         .get('/pemasok/1')
@@ -124,7 +124,7 @@ describe("pemasok Test", ()=> {
 // check pelanggan
 describe("pelanggan Test", ()=> {
   describe("/pelanggan GET", ()=> {
-    it("it should success get the transaksi data", async ()=> {
+    it("it should success get the pelanggan data", async ()=> {
       const cred = await getCredential()    
       const res = await request(app)
         .get('/pelanggan')
@@ -136,7 +136,7 @@ describe("pelanggan Test", ()=> {
       expect(res.body.message).toEqual("Success")
       expect(res.body).toHaveProperty("data")
     })
-    it("it should not success get the transaksi data", async ()=> {
+    it("it should not success get the pelanggan data", async ()=> {
       const cred = await getCredential()    
       const res = await request(app)
         .get('/pelanggan/1')
