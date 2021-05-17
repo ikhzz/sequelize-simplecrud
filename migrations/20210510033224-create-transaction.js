@@ -1,59 +1,59 @@
-"use strict";
+'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("transaksi", {
+    await queryInterface.createTable('transactions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
-      id_barang: {
-        allowNull: false,
+      item_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      id_pelanggan: {
-        allowNull: false,
+      item_amount: {
         type: Sequelize.INTEGER,
-      },
-      jumlah: {
         allowNull: false,
-        type: Sequelize.INTEGER,
       },
       total: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.DECIMAL,
+      },
+      ordered_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      order_type: {
+        type: Sequelize.ENUM(['buy', 'add']),
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
-      deletedAt: {
-        allowNull: true,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATEONLY
+      }
     });
-    await queryInterface.addConstraint("transaksi", {
-      fields: ["id_barang"],
+    await queryInterface.addConstraint("transactions", {
+      fields: ["ordered_id"],
       type: "foreign key",
-      name: "custom_fkey_id_barang",
+      name: "custom_fkey_order_id",
       references: {
-        table: "barang",
+        table: "users",
         field: "id",
       },
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    await queryInterface.addConstraint("transaksi", {
-      fields: ["id_pelanggan"],
+    await queryInterface.addConstraint("transactions", {
+      fields: ["item_id"],
       type: "foreign key",
-      name: "custom_fkey_id_pelangan",
+      name: "custom_fkey_item_id_transaction",
       references: {
-        table: "pelanggan",
+        table: "items",
         field: "id",
       },
       onDelete: "cascade",
@@ -61,6 +61,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("transaksi");
-  },
+    await queryInterface.dropTable('transactions');
+  }
 };

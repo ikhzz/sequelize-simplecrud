@@ -2,4 +2,6 @@ node_modules/
 coverage/
 .env.development
 .env.test
-public/
+public/images/*.jpg
+public/images/*.png
+public/images/*.jpeg

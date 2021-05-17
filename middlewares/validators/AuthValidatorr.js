@@ -1,8 +1,9 @@
 const validator = require('validator')
+const { user } = require('../../models')
 
 class AuthValidator {
 
-  signup = (req, res, next) => {
+  signup = async (req, res, next) => {
     const errors = []
     
     if(!validator.isEmail(req.body.email)){
@@ -44,6 +45,21 @@ class AuthValidator {
       });
     }
     next();
+  }
+
+  updateUser = (req, res, next) => {
+    if(req.body.email){
+      return res.status(401).json({
+        message: "Update Email is not allowed"
+      })
+    }
+    if(req.body.password){
+      return res.status(401).json({
+        message: "Update Password is not allowed"
+      })
+    }
+
+    next()
   }
 }
 

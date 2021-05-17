@@ -25,12 +25,17 @@ class PassportMiddleware {
         async (req, email, password, done) => {
           try {
             const userSignUp = await user.create(req.body);
-
+            
             return done(null, userSignUp, {
               message: "User can be created",
             });
           } catch (error) {
-            // console.log(error)
+            if(error.parent.code == 'ER_DUP_ENTRY'){
+              return done(null, false, {
+                message: "User can't be created",
+                error: `${req.body.email} is registered`,
+              });  
+            }
             return done(null, false, {
               message: "User can't be created",
               error: error.message,
@@ -96,7 +101,7 @@ class PassportMiddleware {
             const userLogin = await user.findOne({ where: token.user });
 
             // If user is admin
-            if (userLogin.role.includes("admin")) {
+            if (userLogin.type.includes("admin")) {
               return done(null, token.user);
             }
 
@@ -125,9 +130,10 @@ class PassportMiddleware {
           try {
             // Find user
             const userLogin = await user.findOne({ where: token.user });
-
-            // If user is admin
-            if (userLogin.role.includes("user") || userLogin.role.includes("admin")) {
+            // If user has a type
+            if (userLogin.type.includes("costumer") 
+            || userLogin.type.includes("admin") 
+            || userLogin.type.includes("suplier")) {
               return done(null, token.user);
             }
 
@@ -156,7 +162,8 @@ class PassportMiddleware {
       if (!user) {
         return res.status(401).json({
           message: "Error at User",
-          error: info.message,
+          info: info.message,
+          error: info.error,
         });
       }
 

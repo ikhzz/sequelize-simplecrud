@@ -10,17 +10,23 @@
   "author": "Ikhz",
   "license": "ISC",
   "dependencies": {
+    "archiver": "^5.3.0",
+    "aws-sdk": "^2.904.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
+    "express-zip": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "s3-zip": "^3.2.0",
     "sequelize": "^6.6.2",
-    "validator": "^13.5.2"
+    "sharp": "^0.28.2",
+    "validator": "^13.5.2",
+    "xml-stream": "^0.4.5"
   },
   "devDependencies": {
     "jest": "^26.6.3",

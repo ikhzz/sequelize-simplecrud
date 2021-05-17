@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 const bcrypt = require('bcrypt')
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
@@ -11,27 +13,23 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  }
-  user.init(
-    {
-      name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: {
-        type: DataTypes.STRING,
+  };
+  user.init({
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
         set(val){
           // as usual how about async encrypt task
           const encryptPassword = bcrypt.hashSync(val, 10)
           this.setDataValue('password', encryptPassword)
         }
-      },
-      role: DataTypes.STRING,
     },
-    {
-      sequelize,
-      paranoid: true,
-      timestamps: true,
-      modelName: "user",
-    }
-  );
+    type: DataTypes.ENUM(['admin', 'costumer', 'suplier']),
+    image: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'user',
+  });
   return user;
 };

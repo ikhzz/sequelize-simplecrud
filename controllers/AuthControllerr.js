@@ -6,15 +6,12 @@ class AuthController {
       const body = {
         user: {
           id: req.user.id,
-        }
+        },
       };
 
-      const token = jwt.sign(
-        body, process.env.JWT_TOKEN, {
-          expiresIn: "60d"
-        }
-      );
-
+      const token = jwt.sign(body, process.env.JWT_TOKEN, {
+        expiresIn: "60d",
+      });
 
       return res.status(200).json({
         message: "Token Created",
